@@ -1,8 +1,7 @@
 import React from "react";
 import './PageList.css';
-import ListItems from "../component/ListItem";
-import PrimaryButton from "../component/primaryButton";
-import AddItems from "../component/AddItems";
+import ListItems from "../../components/ListPrivateItems/ListItem";
+import PrimaryButton from "../../components/ListPrivateItems/primaryButton";
 
 const PageList = () =>{
     return(

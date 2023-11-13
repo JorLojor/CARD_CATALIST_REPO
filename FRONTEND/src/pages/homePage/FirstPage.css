@@ -1,0 +1,23 @@
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.page-home-setting{
+    width:100% ;
+}
+
+.page-home-setting .box-content-first-page{
+    margin: 5% 2% 0 5%;
+    background-color: rgb(164, 164, 164);
+}
+
+.box-profile-home-page img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.box-profile-home-page {
+    border: 1px solid black;
+}
