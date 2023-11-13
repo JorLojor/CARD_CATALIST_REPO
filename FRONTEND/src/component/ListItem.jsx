@@ -12,7 +12,7 @@ const ListItems = () => {
 
     const getItems = async () => {
         try {
-            const response = await axios.get('http://localhost:3444/items');
+            const response = await axios.get('http://localhost:3444/api/v1/items');
             setItems(response.data.data);
             console.log(response.data.data);
         } catch (err) {
@@ -23,7 +23,7 @@ const ListItems = () => {
 
     const deleteItem = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3444/items/${id}`);
+            const response = await axios.delete(`http://localhost:3444/api/v1/items/${id}`);
             if (response.status === 200) {
                 console.log("Item berhasil dihapus");
                 // Perbarui daftar item setelah menghapus

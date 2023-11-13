@@ -5,25 +5,40 @@ import { useNavigate,useParams } from "react-router-dom";
 
 
 const EditItems = () => {
+    const urlPut = "http://localhost:3444/api/v1/items/";
     const [newItems, setNewItems] = useState({
         name: "",
         price: "",
         title: "",
-        image: "",
+        image: null,
     });
-    const urlPut = "http://localhost:3444/items/";
     const navigate = useNavigate();
     const {id} = useParams();
 
-    const getItemsById = async () => {
-        const response = await axios.get(urlPut + id);
-        setNewItems(response.data.data);
-        
-    };
 
     useEffect(() => {
         getItemsById();
     },[]);
+
+    const getItemsById = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3444/api/v1/items/${id}`);
+            const responseData = response.data.data || {};
+            setNewItems(responseData);
+            console.log(responseData);
+        } catch (err) {
+            console.log(err);
+            setNewItems({
+                name: "",
+                price: "",
+                title: "",
+                image: null, // Ganti dengan nilai default yang sesuai
+            });
+        }
+    };
+    
+
+    
 
 
     const updateItems = async (e) => {
@@ -103,8 +118,10 @@ const EditItems = () => {
                             type="file"
                             className="form-control"
                             id="exampleInputPassword1"
-                            onChange={(e) =>
-                            setNewItems({ ...newItems, image: e.target.files[0] })
+                            onChange={(e) => {
+                                    e.target.files.length && setNewItems({ ...newItems, image: e.target.files[0] || null })
+                                }
+                            
                             }
                         />
                         </div>

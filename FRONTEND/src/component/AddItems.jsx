@@ -11,7 +11,7 @@ const AddItems = () => {
         title: "",
         image: "",
     });
-    const urlPost = "http://localhost:3444/items";
+    const urlPost = "http://localhost:3444/api/v1/items";
     const navigate = useNavigate();
 
     const saveItems = async (e) => {
