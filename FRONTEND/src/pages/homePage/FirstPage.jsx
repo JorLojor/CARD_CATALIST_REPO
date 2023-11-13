@@ -27,8 +27,11 @@ const FirstPage = () => {
                                 <div className="col-12">
                                     <h5 className="text-center">fulan</h5>
                                 </div>
-                                <div className="col-12">
-                                    <p className="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quia.</p>
+                                <div className="col-12 tools-dev-design">
+                                    <ul className="list-profile-data-list-tools">
+                                        {/* nanti di mapping */}
+                                        <li><img src="" alt="" /></li>
+                                    </ul>
                                 </div>
                                 <div className="col-12">
                                     <p className="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quia.</p>

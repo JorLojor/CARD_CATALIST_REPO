@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userTypeSchema = new Schema({
-  type: { type: Number, required: true }, // client = 1, vendor = 2
+  type: { type: Number, required: true }, // 1 = admin, 2 = user
   nama: { type: String, required: true },
   namaOrganisiasi: { type: String, required: true },
   email: { type: String, required: true },
@@ -10,4 +10,4 @@ const userTypeSchema = new Schema({
   lokasi: { type: String, required: true },
 }, { timestamps: true },{id: false});
 
-module.exports = mongoose.model('UserType', userTypeSchema);
+module.exports = userTypeSchema

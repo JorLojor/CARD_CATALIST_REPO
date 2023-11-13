@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
+const UserType = require('./UserType');
 
-class UserModels extends mongoose.Schema {
-    constructor() {
-        super({
-            username: { type: String, required: true },
-            password: { type: String, required: true },
-            userType: { type: mongoose.Schema.Types.ObjectId, ref: 'UserType' }
-        }, { timestamps: true });
-    }
-}
+const userModel = new mongoose.Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    userType: { type: UserType, required: true }
+}, { timestamps: true });
+
+module.exports = mongoose.model('User', userModel);
