@@ -29,6 +29,48 @@ exports.getAllUserPaginate = async (req, res) => {
     }
 };
 
+exports.getUserById = async (req, res) => {
+    try{
+        const dataUser = await UserModels.findById(req.params.id)
+        .populate('userSchema');
+
+        if(!dataUser){
+            return res.status(400).json({ msg: "User not found" });
+        }
+        if(!dataUser.userSchema){
+            return res.status(400).json({ msg: "UserSchema not found" });
+        }
+
+        Response.responseSucces(res,dataUser,200,"Get user by id success");
+    }catch(error){
+        Response.responseError(res,error,500,error.message);
+    }
+}
+
+exports.SearchUserByNameAndUsername = async (req, res) => {
+    const { name, username } = req.query;
+
+    try {
+       
+        const query = {};
+        if (name) {
+            query['userSchema.nama'] = { $regex: new RegExp(name, 'i') };
+        }
+        if (username) {
+            query['username'] = { $regex: new RegExp(username, 'i') };
+        }
+
+        const searchResults = await UserModels.find(query)
+            .limit(10)  
+            .lean();  
+
+        Response.responseSucces(res, searchResults, 200, "Search user by name and username success");
+    } catch (error) {
+        Response.responseError(res, error, 500, error.message);
+    }
+};
+
+
 exports.createUser = async (req, res) => {
     try{
         upload(req,res,async(error)=>{
@@ -52,7 +94,7 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports
+exports.updateUser = async (req, res) => {};
 
 
 
