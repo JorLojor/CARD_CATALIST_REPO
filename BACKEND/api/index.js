@@ -14,6 +14,6 @@ router.get('/', (req, res) => {
 
 router.use('/icons', icons); // http://localhost:3444/api/icons
 router.use('/items', items); // http://localhost:3444/api/items
-router.use('/user', user); // http://localhost:3444/api/user
+router.use('/users', user); // http://localhost:3444/api/users
 
 module.exports = router;

@@ -71,28 +71,50 @@ exports.SearchUserByNameAndUsername = async (req, res) => {
 };
 
 
+
 exports.createUser = async (req, res) => {
-    try{
-        upload(req,res,async(error)=>{
-            if(error instanceof multer.MulterError){
-                Response.responseError(res,error,500,error.message);
-            }else if(error){
-                Response.responseError(res,error,500,error.message);
+    try {
+        upload(req, res, async (error) => {
+            if (error instanceof multer.MulterError) {
+                return res.status(500).json({
+                    message: "Internal server error",
+                    error: error.message
+                });
+            } else if (error) {
+                return res.status(500).json({
+                    message: "Internal server error",
+                    error: error.message
+                });
             }
-            const {username,password,type,userSchema} = req.body; 
-            const profilePicture = req.file.path; 
-            if (!username || !password || !type || !userSchema) {
-                return res.status(400).json({ msg: "Please enter all fields" });
+            const { username, password } = req.body;
+            if (!username || !password) {
+                return res.json({ msg: "Please enter all fields" });
             }
 
-            const dataUser = await UserModels.create({username,password,type,userSchema , profilePicture });
-            Response.responseSucces(res,dataUser,200,"Post user success");
-            await dataUser.save();
-        })
-    }catch(error){
-        Response.responseError(res,error,500,error.message);
+            let profilePicture;
+            if (req.file) {
+                image = req.file.path;
+            } else {
+                return res.json({ msg: "Please upload a file" });
+            }
+
+            const dataUser = {
+                username,
+                password,
+                profilePicture : image
+                
+            };
+
+            const result = await UserModels.create(dataUser);
+            // await result.save();
+            return Response.responseSucces(res, result, 200, "Post user success");
+            
+        });
+    } catch (error) {
+        return Response.responseError(res, error, 500, error.message);
     }
-}
+};
+
 
 exports.updateUser = async (req, res) => {
     const id = req.params.id;

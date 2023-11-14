@@ -13,7 +13,7 @@ exports.responseError = (data,res,statusCode,message) => {
         message: message,
         statusCode: statusCode
     });
-    console.log(error.message);
+    console.log(data.message);
 }
 
 
