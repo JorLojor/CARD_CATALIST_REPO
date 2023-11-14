@@ -94,7 +94,42 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports.updateUser = async (req, res) => {};
+exports.updateUser = async (req, res) => {
+    const id = req.params.id;
+    try{
+        upload(req,res,async(error)=>{
+            if(error instanceof multer.MulterError){
+                Response.responseError(res,error,500,error.message);
+            }else if(error){
+                Response.responseError(res,error,500,error.message);
+            }
+            const {username,password,type,userSchema} = req.body; 
+            const profilePicture = req.file.path; 
+            if (!username || !password || !type || !userSchema) {
+                return res.status(400).json({ msg: "Please enter all fields" });
+            }
+
+            const dataUser = await UserModels.findByIdAndUpdate(id,{username,password,type,userSchema,profilePicture});
+            Response.responseSucces(res,dataUser,200,"Update user success");
+            await dataUser.save();
+        })
+    }catch(error){
+        Response.responseError(res,error,500,error.message);
+    }
+};
+
+exports.deleteUser = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const dataUser = await UserModels.findByIdAndDelete(id);
+        Response.responseSucces(res,dataUser,200,"Delete user success");
+    }catch(error){ 
+        Response.responseError(res,error,500,error.message);    
+    }
+};
+
+
+module.exports = exports;
 
 
 
