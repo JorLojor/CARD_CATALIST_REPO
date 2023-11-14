@@ -80,12 +80,12 @@ exports.createUser = async (req, res) => {
                 Response.responseError(res,error,500,error.message);
             }
             const {username,password,type,userSchema} = req.body; 
-            userSchema.profilePicture = req.file.path; 
+            const profilePicture = req.file.path; 
             if (!username || !password || !type || !userSchema) {
                 return res.status(400).json({ msg: "Please enter all fields" });
             }
 
-            const dataUser = await UserModels.create({username,password,type,userSchema});
+            const dataUser = await UserModels.create({username,password,type,userSchema , profilePicture });
             Response.responseSucces(res,dataUser,200,"Post user success");
             await dataUser.save();
         })
