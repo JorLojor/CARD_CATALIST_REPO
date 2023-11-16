@@ -1,7 +1,7 @@
 const db = require('../../models/index');
 const IconsModels = db.items;
 const multer = require("multer");
-const upload = require("../../middleware/file");
+const upload = require("../../middleware/documentImage");
 const Response = require('../../res/sendRes')
 
 

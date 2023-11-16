@@ -1,6 +1,6 @@
 const ItemsModels = require("../../models/items/ItemsModelsCode")
 const multer = require("multer");
-const upload = require("../../middleware/file");
+const upload = require("../../middleware/documentImage");
 
 module.exports = {
     getAllItems: async (req, res) => {

@@ -7,6 +7,9 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   noTelp: { type: String, required: true },
   lokasi: { type: String, required: true },
+  //terelasikan dengan model itemDocument
+  itemsDocument: [{ type: mongoose.Schema.Types.ObjectId, ref: 'itemDocument' }],
+  //terelasikan dengan model itemBE
 }, { timestamps: true });
 
 module.exports = userSchema
